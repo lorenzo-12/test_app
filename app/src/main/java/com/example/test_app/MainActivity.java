@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     //FIREBASE
     DatabaseReference mDatabaseReference;
-    DatabaseReference mDBSteps, mDBUsers;
+    DatabaseReference mDBUsers;
     HashMap<String,User> user_list;
     Steps steps;
 
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //if we unregister the hardware will stop counting the steps
         //sensorManager.unregisterListener(this);
     }
+
 
     @Override
     protected void onResume() {
@@ -135,11 +136,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         delete_diary_btn = findViewById(R.id.delete_diary_button);
 
         //FIREBASE
+
+        //mi creo il collegamento al database
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mDBSteps = mDatabaseReference.child("steps");
         mDBUsers = mDatabaseReference.child("users");
+        //mi creo un dizionario in cui metterò tutti gli utenti presenti nel database
         user_list = new HashMap<String,User>();
-        steps = new Steps();
 
         add_user_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        //creo un eventlistenere al database che si attiva ogni volta che c'è un cambiamento
         mDBUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -280,36 +283,64 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void addUser() {
         // user_list will be automatically updated by the OnDataChange method of firebase
+
+        //mi prendo il nome dell'utente da dover inserire
         String u = username.getText().toString().trim();
         if(u.equals("")) return;
+
+        //mi creo una variabile User e gli assegno il nome inserito dall'utente
         User tmp = new User();
         tmp.setUsername(u);
+
+        //vado nel databse e aggiungo la coppia <nome user, variabile User>
+        //ad esempio: aggiungo nel database una chiave "marco" e gli assegno come valore la variabile User
+        //contentente tutti i dati dell'utente "marco"
         mDBUsers.child(u).setValue(tmp);
     }
 
     public void deleteUser(){
         // user_list will be automatically updated by the OnDataChange method of firebase
+
+        //mi prendo il nome dell'utente da dover eliminare
         String u = username.getText().toString().trim();
         if(u.equals("")) return;
+
+        //vado nel database e rimuovo(se esiste) l'utente che ha come chiave il valore dell'utente inserito
         mDBUsers.child(u).removeValue();
     }
 
     public void addFood(){
         // user_list will be automatically updated by the OnDataChange method of firebase
+
+        //mi prendo tutti i valori necessari (nome cibo, calorie, grassi, proteine, ecc....)
         String fn = food_name.getText().toString().trim();
         int fc = Integer.parseInt(carb.getText().toString());
         int fp = Integer.parseInt(prot.getText().toString());
         int ff = Integer.parseInt(fat.getText().toString());
         int fca = Integer.parseInt(cal.getText().toString());
+
+        //mi prendo il nome dell'utente a cui dovrò inserire tale cibo all'interno
+        //della sua lista cibi
         String u = username.getText().toString().trim();
 
+        //mi prendo dalla mia lista, l'utente desiderato
         User tmp_usr = user_list.get(u);
+
+        //controllo che esista
         if(tmp_usr==null) return;
+
+        //controllo che la sua lista dei cibi non sia vuota, in tal caso ne creo una
         if(tmp_usr.food_list==null){
             tmp_usr.food_list = new HashMap<String,Food>();
         }
+
+        //creo una variabile Food e la aggiungo alla lista cibi dell'utente desiderato
         Food tmp_food = new Food(fn,"none",fc,fp,ff,fca);
+
+        //imposto come chiave il nome del cibo  e come valore la variabile cibo
         tmp_usr.food_list.put(fn,tmp_food);
+
+        //vado nel databse e ricreo/aggiorno la coppia <nome utente, variabil User>
         mDBUsers.child(u).setValue(tmp_usr);
     }
 
@@ -318,6 +349,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String fn = food_name.getText().toString().trim();
         String u = username.getText().toString().trim();
         if(fn.equals("") || u.equals("")) return;
+
+        //vado nel database, vado all'utente desiderato, vado nella sua lista cibi e rimuovo (se esiste) il cibo
+        //che ha come nome il nome inserito dall'utente
         mDBUsers.child(u).child("food_list").child(fn).removeValue();
 
     }
@@ -359,7 +393,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(u.equals("") || dd.equals("") || di.equals("")) return;
         Day tmp_day = new Day(dd);
         tmp_day.setFood_name(di);
+
+        //in questo caso non posso usare come chiave il GIORNO e neppure il NOME DEL CIBO/ESERCIZIO poichè:
+
+        //1)
+        //se il giorno X mangio una mela e una banana in tal caso avrei due valori con la stessa chiave il che porterebbe
+        //a sovrascriverne uno dei due
+
+        //2)
+        //se uso come chiave il nome del CIBO/ESERCIZIO allora avrei lo stesso problema di prima, ad esempio
+        //se mangio una mela in due giorni diversi avrei due valori con la stessa chiave.
+
+        //SOLUZIONE
+        //uso come chiave SIA IL GIORNO CHE IL CIBO/ESERCIZIO
+        //in questo caso li concateno
         tmp_usr.diary.put(di+dd,tmp_day);
+
+        //vado nel database, e ricreo/aggiorno la coppia <UTENTE, variable User>
         mDBUsers.child(u).setValue(tmp_usr);
     }
 
@@ -372,18 +422,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void retriveDB(DataSnapshot snapshot){
+
+        //mi creo una lista dove metterò tutti gli utenti (sotto forma di varibili User) presenti nel databse
         user_list = new HashMap<String,User>();
 
+        //per ogni "figlio" (che nel nostro caso vuol dire PER OGNI UTENTE) presente nel database
         for( DataSnapshot dsp : snapshot.getChildren()){
 
+            //prendi la stringa JSON che rappresenta la variabile User del nostro utente
             HashMap<String,User> user_string = (HashMap<String, User>) dsp.getValue();
+            //prendi il lo username dell'utente (che è anceh la chiave)
             String user_key = dsp.getKey();
+
+            //trasforma la stringa json che rappresenta la variabile, nella variabile stessa
             Gson gson = new Gson();
             String json = user_string.toString();
             Type type = new TypeToken<User>() {}.getType();
             User tmp_user = gson.fromJson(json,type);
 
+            //aggiungi la variabile User che rappresenta l'utente nella lista (quella contenente tutti gli utenti)
             user_list.put(user_key,tmp_user);
+
         }
         printAllUsers();
     }
