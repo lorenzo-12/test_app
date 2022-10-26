@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    String name,surname,email;
 
     //SENSOR
     SensorManager sensorManager;
@@ -217,6 +222,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         loadData();
         printAllUsers();
 
+        debug_db.setText(name);
+        if(name.equals("none")) {
+            openActivity2();
+        }
     }
 
 
@@ -269,6 +278,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         editor.putInt("STEPS", current_steps);
         editor.putInt("PREV_COUNTER",prev);
         editor.putString("CURRENT_DAY",currentDay);
+        editor.putString("NAME",name);
+        editor.putString("SURNAME",surname);
+        editor.putString("EMAIL",email);
         editor.apply();
     }
 
@@ -277,6 +289,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         current_steps = sharedPreferences.getInt("STEPS",0);
         prev = sharedPreferences.getInt("PREV_COUNTER", current_steps);
         lastDay = sharedPreferences.getString("CURRENT_DAY","none");
+        name = sharedPreferences.getString("NAME","none");
+        surname = sharedPreferences.getString("SURNAME","none");
+        email = sharedPreferences.getString("EMAIL","none");
     }
 
 
@@ -462,6 +477,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         debug_text.setText(s);
     }
 
-
+    public void openActivity2(){
+        Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
+    }
 
 }
