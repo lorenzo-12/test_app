@@ -18,9 +18,12 @@ public class User {
     public int cal_goal;
     public String question;
 
+    //for each user we want to keep track of the list of all his/her foods and exercises
+    //and we want to keep track of his/her diary
     public HashMap<String,Food> food_list;
     public HashMap<String,Exercise> exercise_list;
     public HashMap<String,Day> diary;
+
 
     public User() {
         super();
@@ -101,86 +104,6 @@ public class User {
 
     public void setExercise_list(HashMap<String, Exercise> exercise_list) {
         this.exercise_list = exercise_list;
-    }
-
-    public HashMap<String, Day> getDiary() {
-        return diary;
-    }
-
-    public void setDiary(HashMap<String, Day> diary) {
-        this.diary = diary;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getSex() {
-        return sex;
-    }
-
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getCarb_goal() {
-        return carb_goal;
-    }
-
-    public void setCarb_goal(int carb_goal) {
-        this.carb_goal = carb_goal;
-    }
-
-    public int getProt_goal() {
-        return prot_goal;
-    }
-
-    public void setProt_goal(int prot_goal) {
-        this.prot_goal = prot_goal;
-    }
-
-    public int getFat_goal() {
-        return fat_goal;
-    }
-
-    public void setFat_goal(int fat_goal) {
-        this.fat_goal = fat_goal;
-    }
-
-    public int getCal_goal() {
-        return cal_goal;
-    }
-
-    public void setCal_goal(int cal_goal) {
-        this.cal_goal = cal_goal;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
 

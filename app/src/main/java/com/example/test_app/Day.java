@@ -58,59 +58,7 @@ public class Day {
         return res;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getOr() {
-        return or;
-    }
-
-    public void setOr(int or) {
-        this.or = or;
-    }
-
-    public String getFood_name() {
-        return food_name;
-    }
-
     public void setFood_name(String food_name) {
         this.food_name = food_name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getExercise_name() {
-        return exercise_name;
-    }
-
-    public void setExercise_name(String exercise_name) {
-        this.exercise_name = exercise_name;
-    }
-
-    public int getSet() {
-        return set;
-    }
-
-    public void setSet(int set) {
-        this.set = set;
-    }
-
-    public int getRep() {
-        return rep;
-    }
-
-    public void setRep(int rep) {
-        this.rep = rep;
     }
 }

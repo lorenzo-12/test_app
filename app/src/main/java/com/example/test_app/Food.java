@@ -58,52 +58,5 @@ public class Food {
         res += space+"c: "+String.valueOf(carb)+" p: "+String.valueOf(prot)+" f: "+String.valueOf(fat)+" c: "+String.valueOf(cal)+"\n";
         return res;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getCarb() {
-        return carb;
-    }
-
-    public void setCarb(int carb) {
-        this.carb = carb;
-    }
-
-    public int getProt() {
-        return prot;
-    }
-
-    public void setProt(int prot) {
-        this.prot = prot;
-    }
-
-    public int getFat() {
-        return fat;
-    }
-
-    public void setFat(int fat) {
-        this.fat = fat;
-    }
-
-    public int getCal() {
-        return cal;
-    }
-
-    public void setCal(int cal) {
-        this.cal = cal;
-    }
+    
 }
