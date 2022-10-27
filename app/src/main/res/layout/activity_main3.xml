@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity3">
+
+    <TextView
+        android:id="@+id/step_counter_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#3F51B5"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/step_counter_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/step_counter_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="steps:"
+        android:textColor="#3F51B5"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="date:"
+        android:textColor="#3F51B5"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/debug_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Button
+        android:id="@+id/add_user_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="add_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_text"
+        app:layout_constraintVertical_bias="0.006" />
+
+    <EditText
+        android:id="@+id/username_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="username"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/food_name_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:ems="10"
+        android:hint="food_name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/carb_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="carb"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/food_name_text" />
+
+    <EditText
+        android:id="@+id/prot_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="prot"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toEndOf="@+id/carb_text"
+        app:layout_constraintTop_toBottomOf="@+id/food_name_text" />
+
+    <EditText
+        android:id="@+id/fat_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="fat"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/carb_text"
+        app:layout_constraintTop_toBottomOf="@+id/carb_text" />
+
+    <EditText
+        android:id="@+id/cal_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="cal"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/prot_text"
+        app:layout_constraintTop_toBottomOf="@+id/prot_text" />
+
+    <Button
+        android:id="@+id/add_food_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="add_food"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fat_text" />
+
+    <TextView
+        android:id="@+id/debug_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_food_button" />
+
+    <EditText
+        android:id="@+id/exercise_name_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:ems="10"
+        android:hint="exercise_name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/prot_text" />
+
+    <Button
+        android:id="@+id/add_exercise_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="add_exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_name_text" />
+
+    <Button
+        android:id="@+id/delete_food_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="delete_food"
+        app:layout_constraintStart_toStartOf="@+id/add_food_button"
+        app:layout_constraintTop_toBottomOf="@+id/add_food_button" />
+
+    <Button
+        android:id="@+id/delete_exercise_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="delete_exerc"
+        app:layout_constraintStart_toStartOf="@+id/add_exercise_button"
+        app:layout_constraintTop_toBottomOf="@+id/add_exercise_button" />
+
+    <Button
+        android:id="@+id/delete_user_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="delete_user"
+        app:layout_constraintStart_toStartOf="@+id/add_user_button"
+        app:layout_constraintTop_toBottomOf="@+id/add_user_button" />
+
+    <EditText
+        android:id="@+id/diary_date_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:hint="date"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_exercise_button" />
+
+    <EditText
+        android:id="@+id/diary_item_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="food/exercise"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/diary_date_text"
+        app:layout_constraintTop_toBottomOf="@+id/diary_date_text" />
+
+    <Button
+        android:id="@+id/add_diary_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="add_diary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diary_item_text" />
+
+    <Button
+        android:id="@+id/delete_diary_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="delete_diary"
+        app:layout_constraintEnd_toEndOf="@+id/add_diary_button"
+        app:layout_constraintTop_toBottomOf="@+id/add_diary_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
